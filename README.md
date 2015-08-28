@@ -14,12 +14,12 @@ Installation number: 97443-1.
 Licensed for use by: University of Washington
 
 IDL> call_ttv,10
-% Compiled module: CALL_TTV.
-% Compiled module: COMPUTE_TTV.
-% Compiled module: TTV_SUCCINCT.
-% Compiled module: LAPLACE_COEFFICIENTS3.
-% Compiled module: LAPLACE_WISDOM.
-% Program caused arithmetic error: Floating illegal operand
+% Compiled module: CALL_TTV.  
+% Compiled module: COMPUTE_TTV.  
+% Compiled module: TTV_SUCCINCT.  
+% Compiled module: LAPLACE_COEFFICIENTS3.  
+% Compiled module: LAPLACE_WISDOM.  
+% Program caused arithmetic error: Floating illegal operand  
 IDL> 
 
 This computes the TTVs for a system similar to Kepler-62e/f stored
@@ -28,26 +28,26 @@ the screen.
 
 Here is an example of using the code in Julia:
 
-Julia$ julia
+Julia$ julia  
                _
-   _       _ _(_)_     |  A fresh approach to technical computing
-  (_)     | (_) (_)    |  Documentation: http://docs.julialang.org
-   _ _   _| |_  __ _   |  Type "help()" for help.
+   _       _ _(_)_     |  A fresh approach to technical computing  
+  (_)     | (_) (_)    |  Documentation: http://docs.julialang.org  
+   _ _   _| |_  __ _   |  Type "help()" for help.  
   | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 0.3.0 (2014-08-20 20:43 UTC)
- _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
-|__/                   |  x86_64-apple-darwin13.3.0
+  | | |_| | | | (_| |  |  Version 0.3.0 (2014-08-20 20:43 UTC)  
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release  
+|__/                   |  x86_64-apple-darwin13.3.0  
 
-julia> data=readdlm("kepler62ef_planets.txt",',',Float64)
+julia> data=readdlm("kepler62ef_planets.txt",',',Float64)  
 1x10 Array{Float64,2}:
  3.02306e-5  122.386  -16.5926  -0.00127324  0.0026446  1.67874e-5  267.307  155.466  -0.0025544  0.00117917
 
-julia> include("test_ttv.jl")
+julia> include("test_ttv.jl")  
 test_ttv (generic function with 1 method)
 
-julia> @time ttv1,ttv2=test_ttv(5,40,20,data);
-elapsed time: 0.345652398 seconds (13941760 bytes allocated)
-julia> @time ttv1,ttv2=test_ttv(5,40,20,data);
+julia> @time ttv1,ttv2=test_ttv(5,40,20,data);  
+elapsed time: 0.345652398 seconds (13941760 bytes allocated)  
+julia> @time ttv1,ttv2=test_ttv(5,40,20,data);  
 elapsed time: 0.000526126 seconds (20404 bytes allocated)
 
 This computes the TTVs for a system similar to Kepler-62e/f stored
