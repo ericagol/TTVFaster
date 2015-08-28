@@ -1,0 +1,83 @@
+function laplace_wisdom(s::Float64,i::Int64,j::Int64,a::Float64)
+# function laplace_wisdom,s,i,j,a  IDL
+# double laplace(double s, int i, int j, double a);  c
+
+
+#/* Code due to Jack Wisdom */
+#/* compute Laplace coefficients and Leverrier derivatives
+#          j
+#     j   d     i
+#    a   ---   b (a)
+#          j    s
+#        da
+#
+#   by series summation */
+
+##define LAPLACE_EPS 1.0e-12
+LAPLACE_EPS=1.0e-12
+
+as = a*a
+
+#if (i lt 0) then i = -i
+i=abs(i)
+
+if j <= i     #/* compute first term in sum */
+  factor4 = 1.0
+  for k=0:j-1
+    factor4 *= i - k
+  end
+  sum = factor4
+  q0 = 0
+else
+  q0 = fld(j + 1 - i,2)
+  sum = 0.0
+  factor4 = 1.0
+end
+
+#  /* compute factors for terms in sum */
+
+factor1 = s
+factor2 = s + i
+factor3 = i + 1
+for q=1:q0-1       #/* no contribution for q = 0 */
+  factor1 *= s + q
+  factor2 *= s + i + q
+  factor3 *= i+q+1
+end
+if q0 > 1
+  q=q0
+else
+  q=1
+end
+#println(j+1-i,q0)
+term = as * factor1 * factor2 / (factor3 * q)
+
+#  /* sum series */
+
+while  (term*factor4) > LAPLACE_EPS
+  factor4 = 1.0
+  for k=0:j-1
+    factor4 *= (2*q + i - k)
+  end
+  sum += term * factor4
+  factor1 += 1
+  factor2 += 1
+  factor3 += 1
+  q = q+1
+  term *= as * factor1 * factor2 / (factor3 * q)
+end
+
+#  /* fix coefficient */
+
+for k=0:i-1
+  sum *= (s + k)/(k+1)
+end
+
+if q0 <= 0
+  sum *= 2 * a^i
+else
+  sum *= 2 * a^(2*q0 + i - 2)
+end
+# Return the Laplace Coefficient:
+sum
+end
