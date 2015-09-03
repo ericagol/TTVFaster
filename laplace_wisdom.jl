@@ -14,7 +14,7 @@ function laplace_wisdom(s::Float64,i::Int64,j::Int64,a::Float64)
 #   by series summation */
 
 ##define LAPLACE_EPS 1.0e-12
-LAPLACE_EPS=1.0e-12
+const LAPLACE_EPS=1.0e-12
 
 as = a*a
 
@@ -73,11 +73,8 @@ for k=0:i-1
   sum *= (s + k)/(k+1)
 end
 
-if q0 <= 0
-  sum *= 2 * a^i
-else
-  sum *= 2 * a^(2*q0 + i - 2)
-end
+apower = (q0 <= 0) ?  i : 2*q0 + i - 2
+sum *= 2 * a^apower
 # Return the Laplace Coefficient:
 sum
 end

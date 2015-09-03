@@ -5,7 +5,7 @@
 #include("ttv_coeff.jl")
 include("ttv_succinct.jl")
 
-function compute_ttv!(jmax::Int64,p1::Planet_plane,p2::Planet_plane,time1::Array,time2::Array,ttv1::Array,ttv2::Array,f1::Array,f2::Array,b::Array,alpha0::Float64,b0::Array)
+function compute_ttv!(jmax::Int64,p1::Planet_plane,p2::Planet_plane,time1::Array{Float64,1},time2::Array{Float64,1},ttv1::Array{Float64,1},ttv2::Array{Float64,1},f1::Array{Float64,2},f2::Array{Float64,2},b::Array{Float64,2},alpha0::Float64,b0::Array{Float64,2})
 
 # Computes transit-timing variations to linear order in
 # eccentricity for non-resonant, plane-parallel planets.
