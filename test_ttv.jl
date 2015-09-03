@@ -21,7 +21,7 @@ v(z::Float64,d1::Float64,d2::Float64,m::Int64)= ((m*(1-z*z)+6*z)*d1+(2+z*z)*d2)/
 include("compute_ttv.jl")
 include("laplace_coefficients_initialize.jl")
 
-function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Array{Float64,1})
+function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Array{Float64,2})
 @assert(jmax>=1)  # Should there be a larger minimum?
 @assert(n1>2)
 @assert(n2>2)
