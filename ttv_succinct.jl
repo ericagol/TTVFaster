@@ -65,7 +65,7 @@ for j=0:jmax
     f2[j+1,1]=u(kappa,-jd*(A_j00-dj1/alpha^2),A_j01-dj1/alpha^2)
     f2[j+1,2]=u(kappa-1,-jd*(jd*A_j00-0.5*A_j01-0.5*dj1/alpha^2),jd*A_j01-0.5*A_j02-dj1/alpha^2)
     f2[j+1,3]=u(kappa+1,-jd*(-jd*A_j00-0.5*A_j01+1.5*dj1/alpha^2),-jd*A_j01-0.5*A_j02+dj1/alpha^2)
-    f2[j+1,4]=u(kappa-1/alpha^1.5,-jd*(-jd*A_j00-0.5*A_j10),-jd*A_j01-0.5*A_j11)
+    f2[j+1,4]=u(kappa-1/(alpha*sqrt(alpha)),-jd*(-jd*A_j00-0.5*A_j10),-jd*A_j01-0.5*A_j11)
   else
     if j == 1
       f2[j+1,1]=u(kappa,-jd*(A_j00-dj1/alpha^2),A_j01-dj1/alpha^2)
