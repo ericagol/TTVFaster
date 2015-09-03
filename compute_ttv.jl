@@ -25,10 +25,10 @@ function compute_ttv!(jmax::Int64,p1::Planet_plane,p2::Planet_plane,time1::Array
 #      b: Laplace coefficients (& derivatives) for outer planet
 # Compute the semi-major axis ratio of the planets:
 # println(p1.period,p2.period)
-alpha = (p1.period/p2.period)^(2//3)  # Julia supports rational numbers!
+const alpha = (p1.period/p2.period)^(2//3)  # Julia supports rational numbers!
 # Number of times:
-ntime1 = size(time1)
-ntime2 = size(time2)
+const ntime1 = length(time1)
+const ntime2 = length(time2)
 # Compute the coefficients:
 ttv_succinct!(jmax+1,alpha,f1,f2,b,alpha0,b0)  # I need to compute coefficients one higher than jmax
 # Compute TTVs for inner planet (equation 33):
@@ -43,7 +43,7 @@ n2=2pi/p2.period
 # Compute initial longitudes:
 lam10=-n1*p1.trans0 + 2*p1.eccen*sin1om
 lam20=-n2*p2.trans0 + 2*p2.eccen*sin2om
-for i=1:ntime1[1]
+for i=1:ntime1
 # Compute the longitudes of the planets at times of transit of planet 1 (equation 49):
   lam11 = n1*time1[i]+lam10
   lam21 = n2*time1[i]+lam20
@@ -73,7 +73,7 @@ for i=1:ntime1[1]
   ttv1[i] = ttv1[i]*p1.period*p2.mass_ratio/(2pi)
 end
 # Compute TTVs for outer planet (equation 33):
-for i=1:ntime2[1]
+for i=1:ntime2
 # Compute the longitudes of the planets at times of transit of planet 2:
   lam12 = n1*time2[i]+lam10
   lam22 = n2*time2[i]+lam20
