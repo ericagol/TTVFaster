@@ -26,15 +26,15 @@ if j <= i     #/* compute first term in sum */
   for k=0:j-1
     factor4 *= i - k
   end
-  sum = factor4
+  lap_coef_sum = factor4
   q0 = 0
 else
   q0 = fld(j + 1 - i,2)
-  sum = 0.0
+  lap_coef_sum = 0.0
   factor4 = 1.0
 end
 
-#  /* compute factors for terms in sum */
+#  /* compute factors for terms in lap_coef_sum */
 
 factor1 = s
 factor2 = s + i
@@ -59,7 +59,7 @@ while  (term*factor4) > LAPLACE_EPS
   for k=0:j-1
     factor4 *= (2*q + i - k)
   end
-  sum += term * factor4
+  lap_coef_sum += term * factor4
   factor1 += 1
   factor2 += 1
   factor3 += 1
@@ -70,11 +70,11 @@ end
 #  /* fix coefficient */
 
 for k=0:i-1
-  sum *= (s + k)/(k+1)
+  lap_coef_sum *= (s + k)/(k+1)
 end
 
 apower = (q0 <= 0) ?  i : 2*q0 + i - 2
-sum *= 2 * a^apower
+lap_coef_sum *= 2 * a^apower
 # Return the Laplace Coefficient:
-sum
+return lap_coef_sum
 end
