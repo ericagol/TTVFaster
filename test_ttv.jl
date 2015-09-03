@@ -2,7 +2,7 @@
 # compute_ttv.jl.  Please cite Agol & Deck (2015) if
 # you make use of this in your research.
 
-type Planet_plane
+immutable Planet_plane
 # Parameters of a planet in a plane-parallel system
 # Mass ratio of the planet to the star:
   mass_ratio :: Float64
@@ -14,9 +14,9 @@ type Planet_plane
   omega    :: Float64
 end
 
-u(gamma::Float64,c1::Float64,c2::Float64)= ((3+gamma^2)*c1+2*gamma*c2)/gamma^2/(1-gamma^2)
+u(gamma::Float64,c1::Float64,c2::Float64)= ((3+gamma^2)*c1+2*gamma*c2)/(gamma*gamma*(1-gamma*gamma))
 # m=+/-1
-v(z::Float64,d1::Float64,d2::Float64,m::Int64)= ((m*(1-z^2)+6*z)*d1+(2+z^2)*d2)/(z*(1-z^2)*(z+m)*(z+2*m))
+v(z::Float64,d1::Float64,d2::Float64,m::Int64)= ((m*(1-z*z)+6*z)*d1+(2+z*z)*d2)/(z*(1-z*z)*(z+m)*(z+2*m))
 
 include("compute_ttv.jl")
 include("laplace_coefficients_initialize.jl")
@@ -36,12 +36,12 @@ alpha0=(p1.period/p2.period)^(2//3)
 # Initialize the computation of the Laplace coefficients:
 b0=laplace_coefficients_initialize(jmax+1,alpha0)
 # Define arrays to hold the TTVs:
-ttv1=zeros(n1)
-ttv2=zeros(n2)
+ttv1=Array(Float64,n1)
+ttv2=Array(Float64,n2)
 # Define arrays to hold the TTV coefficients and Laplace coefficients:
-f1=zeros(jmax+2,5)
-f2=zeros(jmax+2,5)
-b=zeros(Float64,jmax+2,3)
+f1=Array(Float64,jmax+2,5)
+f2=Array(Float64,jmax+2,5)
+b=Array(Float64,jmax+2,3)
 for i in 1:num_evals
    # Call the compute_ttv code which implements equation (33)
    compute_ttv!(jmax,p1,p2,time1,time2,ttv1,ttv2,f1,f2,b,alpha0,b0)
