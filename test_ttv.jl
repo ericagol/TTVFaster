@@ -39,7 +39,7 @@ f1=zeros(jmax+2,5)
 f2=zeros(jmax+2,5)
 b=zeros(Float64,jmax+2,3)
 # Call the compute_ttv code which implements equation (33)
-compute_ttv!(jmax,p1,p2,time1,time2,ttv1,ttv2,f1,f2,b,alpha0,b0)
+compute_ttv!(jmax,p1,p2,collect(time1),collect(time2),ttv1,ttv2,f1,f2,b,alpha0,b0)
 # Write the mean ephemeris and TTV results to two files:
 writedlm("inner_ttv.txt",[time1 ttv1])
 writedlm("outer_ttv.txt",[time2 ttv2])
