@@ -1,6 +1,8 @@
 This code was written by Katherine Deck 09-07-2015
 kdeck@caltech.edu
 
+Please cite Agol & Deck (2015) if you make use of this in your research.
+
 To compile:
 gcc -o predict_formula predict_formula.c -lm -O3 -Wall
 to run:
