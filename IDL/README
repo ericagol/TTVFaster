@@ -1,3 +1,6 @@
+This code was writen by Eric Agol 09-07-2015
+agol@uw.edu
+
 First order eccentricity transit timing variations (TTVs) computed in Agol & Deck (2015)
 
 This implements equation (33) from that paper by computing the Laplace coefficients using a series solution due to Jack Wisdom, computing the f_{1,j}^{(+-k)} coefficients given in equation (34) using the functions u and v_+- with coefficients given in Table 1.
