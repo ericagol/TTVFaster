@@ -8,7 +8,7 @@ v_+- with coefficients given in Table 1.
 
 Here is an example of using the code in  IDL:
 
-```IDL
+```
 first_order$ idl
 IDL Version 8.4, Mac OS X (darwin x86_64 m64). (c) 2014, Exelis Visual Information Solutions, Inc.
 Installation number: 97443-1.
@@ -30,7 +30,7 @@ the screen.
 
 Here is an example of using the code in Julia:
 
-```Julia
+```
 Julia$ julia  
                _
    _       _ _(_)_     |  A fresh approach to technical computing  
