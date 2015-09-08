@@ -8,6 +8,7 @@ v_+- with coefficients given in Table 1.
 
 Here is an example of using the code in  IDL:
 
+```
 first_order$ idl
 IDL Version 8.4, Mac OS X (darwin x86_64 m64). (c) 2014, Exelis Visual Information Solutions, Inc.
 Installation number: 97443-1.
@@ -21,6 +22,7 @@ IDL> call_ttv,10
 % Compiled module: LAPLACE_WISDOM.  
 % Program caused arithmetic error: Floating illegal operand  
 IDL> 
+```
 
 This computes the TTVs for a system similar to Kepler-62e/f stored
 in the file kepler62ef_planet.txt.  The TTVs will be plotted to
@@ -28,6 +30,7 @@ the screen.
 
 Here is an example of using the code in Julia:
 
+```
 Julia$ julia  
                _
    _       _ _(_)_     |  A fresh approach to technical computing  
@@ -49,6 +52,7 @@ julia> @time ttv1,ttv2=test_ttv(5,40,20,data);
 elapsed time: 0.345652398 seconds (13941760 bytes allocated)  
 julia> @time ttv1,ttv2=test_ttv(5,40,20,data);  
 elapsed time: 0.000526126 seconds (20404 bytes allocated)
+```
 
 This computes the TTVs for a system similar to Kepler-62e/f stored
 in the file kepler62ef_planet.txt.  The TTVs will be written
@@ -70,15 +74,25 @@ periastron.
 An example of using the C version of this code:
 
 to compile:
+
+```bash
 gcc -o predict_formula predict_formula.c -lm -O3 -Wall
+```
+
 to run:
+
+```bash
 ./predict_formula 2 test_ic2 0 1600 6 output_test_ic2
 ./executable    n_planets   param_file t0 tfinal jmax output_file
+```
 
 
 param_file format:
+
+```
 mstar m1 p1 e1*cos(arg peri1) i1 Omega1 e1*sin(arg peri1) TT1
 + repeat for remaining planets
+```
 
 Units are hardwired into predict_formula.c in the definition of G (global variable, at top) to be masses/solar masses distance/AU and time/day.
 
