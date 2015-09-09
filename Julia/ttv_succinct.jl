@@ -2,6 +2,10 @@
 # solution from Agol & Deck (2015).  Please cite this paper
 # if you make use of this in your research.
 
+u(gamma::Real,c1::Real,c2::Real)= ((3+gamma*gamma)*c1+2*gamma*c2)/(gamma*gamma*(1-gamma*gamma))
+# m=+/-1
+v(z::Real,d1::Float64,d2::Real,m::Real)= ((m*(1-z*z)+6*z)*d1+(2+z*z)*d2)/(z*(1-z*z)*(z+m)*(z+2*m))
+
 function ttv_succinct!(jmax::Int64,alpha::Float64,f1::Array{Float64,2},f2::Array{Float64,2},b::Array{Float64,2},alpha0::Float64,b0::Array{Float64,2})
 
 # See simple_solution.pdf 7/16/2015
@@ -59,23 +63,24 @@ sqrtalpha = sqrt(alpha)
 # Now for the outer planet:
 # Outer planet coefficients, in order k=0,-2,2,-1,1 (see Table 1):
 # TODO: Test if it is worth making an one_over_alpha_squared?
+  one_over_alpha_squared = 1/(alpha*alpha)
   if j >= 2
-    f2[j+1,1]=u(kappa,-jd*(A_j00-dj1/alpha^2),A_j01-dj1/alpha^2)
-    f2[j+1,2]=u(kappa-1,-jd*(jd*A_j00-0.5*A_j01-0.5*dj1/alpha^2),jd*A_j01-0.5*A_j02-dj1/alpha^2)
-    f2[j+1,3]=u(kappa+1,-jd*(-jd*A_j00-0.5*A_j01+1.5*dj1/alpha^2),-jd*A_j01-0.5*A_j02+dj1/alpha^2)
+    f2[j+1,1]=u(kappa,-jd*(A_j00-dj1*one_over_alpha_squared),A_j01-dj1*one_over_alpha_squared)
+    f2[j+1,2]=u(kappa-1,-jd*(jd*A_j00-0.5*A_j01-0.5*dj1*one_over_alpha_squared),jd*A_j01-0.5*A_j02-dj1*one_over_alpha_squared)
+    f2[j+1,3]=u(kappa+1,-jd*(-jd*A_j00-0.5*A_j01+1.5*dj1*one_over_alpha_squared),-jd*A_j01-0.5*A_j02+dj1*one_over_alpha_squared)
     f2[j+1,4]=u(kappa-1/(alpha*sqrtalpha),-jd*(-jd*A_j00-0.5*A_j10),-jd*A_j01-0.5*A_j11)
   else
     if j == 1
-      f2[j+1,1]=u(kappa,-jd*(A_j00-dj1/alpha^2),A_j01-dj1/alpha^2)
-      f2[j+1,2]=u(kappa-1,-jd*(jd*A_j00-0.5*A_j01-0.5*dj1/alpha^2),jd*A_j01-0.5*A_j02-dj1/alpha^2)
-      f2[j+1,3]=u(kappa+1,-jd*(-jd*A_j00-0.5*A_j01+1.5*dj1/alpha^2),-jd*A_j01-0.5*A_j02+dj1/alpha^2)
+      f2[j+1,1]=u(kappa,-jd*(A_j00-dj1*one_over_alpha_squared),A_j01-dj1*one_over_alpha_squared)
+      f2[j+1,2]=u(kappa-1,-jd*(jd*A_j00-0.5*A_j01-0.5*dj1*one_over_alpha_squared),jd*A_j01-0.5*A_j02-dj1*one_over_alpha_squared)
+      f2[j+1,3]=u(kappa+1,-jd*(-jd*A_j00-0.5*A_j01+1.5*dj1*one_over_alpha_squared),-jd*A_j01-0.5*A_j02+dj1*one_over_alpha_squared)
     end
   end
-  f2[j+1,5]=u(kappa+1/(alpha*sqrtalpha),-jd*(jd*A_j00-0.5*A_j10-2.0*dj1/alpha^2),jd*A_j01-0.5*A_j11-2.0*dj1/alpha^2)
+  f2[j+1,5]=u(kappa+1/(alpha*sqrtalpha),-jd*(jd*A_j00-0.5*A_j10-2.0*dj1*one_over_alpha_squared),jd*A_j01-0.5*A_j11-2.0*dj1*one_over_alpha_squared)
 # Add in the k=\pm 2 coefficients (note that d1 & d2 are the same as c1 & c2 for k=0):
   if j >= 1
-    f2[j+1,2]=f2[j+1,2]+v(kappa,-jd*(A_j00-dj1/alpha^2),A_j01-dj1/alpha^2,-1)
-    f2[j+1,3]=f2[j+1,3]+v(kappa,-jd*(A_j00-dj1/alpha^2),A_j01-dj1/alpha^2, 1)
+    f2[j+1,2]=f2[j+1,2]+v(kappa,-jd*(A_j00-dj1*one_over_alpha_squared),A_j01-dj1*one_over_alpha_squared,-1)
+    f2[j+1,3]=f2[j+1,3]+v(kappa,-jd*(A_j00-dj1*one_over_alpha_squared),A_j01-dj1*one_over_alpha_squared, 1)
   end
 # That's it!
 end

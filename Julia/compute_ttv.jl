@@ -17,10 +17,6 @@ immutable Planet_plane
   omega    :: Float64
 end
 
-u(gamma::Float64,c1::Float64,c2::Float64)= ((3+gamma*gamma)*c1+2*gamma*c2)/(gamma*gamma*(1-gamma*gamma))
-# m=+/-1
-v(z::Float64,d1::Float64,d2::Float64,m::Int64)= ((m*(1-z*z)+6*z)*d1+(2+z*z)*d2)/(z*(1-z*z)*(z+m)*(z+2*m))
-
 function compute_ttv!(jmax::Int64,p1::Planet_plane,p2::Planet_plane,time1::Array{Float64,1},time2::Array{Float64,1},ttv1::Array{Float64,1},ttv2::Array{Float64,1},f1::Array{Float64,2},f2::Array{Float64,2},b::Array{Float64,2},alpha0::Float64,b0::Array{Float64,2})
 
 # Computes transit-timing variations to linear order in
