@@ -8,6 +8,7 @@ v_+- with coefficients given in Table 1.
 
 Here is an example of using the code in  IDL:
 
+```
 first_order$ idl
 IDL Version 8.4, Mac OS X (darwin x86_64 m64). (c) 2014, Exelis Visual Information Solutions, Inc.
 Installation number: 97443-1.
@@ -21,6 +22,7 @@ IDL> call_ttv,10
 % Compiled module: LAPLACE_WISDOM.  
 % Program caused arithmetic error: Floating illegal operand  
 IDL> 
+```
 
 This computes the TTVs for a system similar to Kepler-62e/f stored
 in the file kepler62ef_planet.txt.  The TTVs will be plotted to
@@ -28,6 +30,7 @@ the screen.
 
 Here is an example of using the code in Julia:
 
+```
 Julia$ julia  
                _
    _       _ _(_)_     |  A fresh approach to technical computing  
@@ -49,6 +52,7 @@ julia> @time ttv1,ttv2=test_ttv(5,40,20,data);
 elapsed time: 0.345652398 seconds (13941760 bytes allocated)  
 julia> @time ttv1,ttv2=test_ttv(5,40,20,data);  
 elapsed time: 0.000526126 seconds (20404 bytes allocated)
+```
 
 This computes the TTVs for a system similar to Kepler-62e/f stored
 in the file kepler62ef_planet.txt.  The TTVs will be written
@@ -66,3 +70,42 @@ the mass ratio of the planet to the star, t0 is the initial
 transit time (of the averaged orbit), Period is the mean orbital
 period, e is the eccentricity, and omega is the longitude of
 periastron.
+
+An example of using the C version of this code:
+
+to compile:
+
+```bash
+gcc -o predict_formula predict_formula.c -lm -O3 -Wall
+```
+
+to run:
+
+```bash
+./predict_formula 2 test_ic2 0 1600 6 output_test_ic2
+./executable    n_planets   param_file t0 tfinal jmax output_file
+```
+
+
+param_file format:
+
+```
+mstar m1 p1 e1*cos(arg peri1) i1 Omega1 e1*sin(arg peri1) TT1
++ repeat for remaining planets
+```
+
+Units are hardwired into predict_formula.c in the definition of G (global variable, at top) to be masses/solar masses distance/AU and time/day.
+
+all angles are in radians
+
+TT1 = the initial time of transit (according to the mean ephemeris). Make sure that your t0 in the input line matches the t0 your initial transits are refered to in the parameter file!
+
+orbital elements are averaged orbital elements
+
+inclinations do not enter the formula at all; they are in fact never used by the code. Omega is used only to determine the true anomaly of the planet at transit, according to the (hardwired) reference direction that at transit the true longitude is 0.0.
+
+Hence Omega = -PI/2 and i=PI/2 implies an edge on orbit with the ascending node in the plane of the sky.
+
+the output file is:
+Planet # (zero based) Transit # (zero based) Transit time
+
