@@ -62,7 +62,6 @@ sqrtalpha = sqrt(alpha)
 
 # Now for the outer planet:
 # Outer planet coefficients, in order k=0,-2,2,-1,1 (see Table 1):
-# TODO: Test if it is worth making an one_over_alpha_squared?
   one_over_alpha_squared = 1/(alpha*alpha)
   if j >= 2
     f2[j+1,1]=u(kappa,-jd*(A_j00-dj1*one_over_alpha_squared),A_j01-dj1*one_over_alpha_squared)
