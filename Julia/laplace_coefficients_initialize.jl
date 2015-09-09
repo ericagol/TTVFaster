@@ -1,6 +1,6 @@
 include("laplace_wisdom.jl")
 
-function laplace_coefficients_initialize(jmax::Integer,alpha::Real)
+function laplace_coefficients_initialize(jmax::Integer,alpha::Number)
 # This computes the Laplace coefficients via recursion.
 const nmax=7
 b0=Array(eltype(alpha),nmax,jmax+1) # Array to hold the coefficients

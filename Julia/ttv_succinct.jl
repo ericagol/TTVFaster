@@ -2,11 +2,11 @@
 # solution from Agol & Deck (2015).  Please cite this paper
 # if you make use of this in your research.
 
-u{T<:Real}(gamma::T,c1::T,c2::T)= ((3+gamma*gamma)*c1+2*gamma*c2)/(gamma*gamma*(1-gamma*gamma))
+u{T<:Number}(gamma::T,c1::T,c2::T)= ((3+gamma*gamma)*c1+2*gamma*c2)/(gamma*gamma*(1-gamma*gamma))
 # m=+/-1
-v{T<:Real}(z::T,d1::T,d2::T,m::Integer)= ((m*(1-z*z)+6*z)*d1+(2+z*z)*d2)/(z*(1-z*z)*(z+m)*(z+2*m))
+v{T<:Number}(z::T,d1::T,d2::T,m::Integer)= ((m*(1-z*z)+6*z)*d1+(2+z*z)*d2)/(z*(1-z*z)*(z+m)*(z+2*m))
 
-function ttv_succinct!{T<:Real}(jmax::Integer,alpha::T,f1::Array{T,2},f2::Array{T,2},b::Array{T,2},alpha0::T,b0::Array{T,2})
+function ttv_succinct!(jmax::Integer,alpha::Number,f1::Array{Float64,2},f2::Array{Float64,2},b::Array{Float64,2},alpha0::Number,b0::Array{Float64,2})
 
 # See simple_solution.pdf 7/16/2015
 

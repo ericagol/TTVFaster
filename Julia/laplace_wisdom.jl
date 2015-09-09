@@ -1,4 +1,4 @@
-function laplace_wisdom(s::Real,i::Integer,j::Integer,a::Real)
+function laplace_wisdom(s::Real,i::Integer,j::Integer,a::Number)
 # function laplace_wisdom,s,i,j,a  IDL
 # double laplace(double s, int i, int j, double a);  c
 

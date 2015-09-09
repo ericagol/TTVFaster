@@ -5,19 +5,19 @@
 #include("ttv_coeff.jl")
 include("ttv_succinct.jl")
 
-immutable Planet_plane
+immutable Planet_plane{T<:Number}
 # Parameters of a planet in a plane-parallel system
 # Mass ratio of the planet to the star:
-  mass_ratio :: Float64
+  mass_ratio :: T
 # Initial time of transit:
-  period   :: Float64
-  trans0   :: Float64
-  eccen    :: Float64
+  period   :: T
+  trans0   :: T
+  eccen    :: T
 # longitude of periastron measured from line of sight, in radians:
-  omega    :: Float64
+  omega    :: T
 end
 
-function compute_ttv!{T<:Real}(jmax::Integer,p1::Planet_plane,p2::Planet_plane,time1::Array{T,1},time2::Array{T,1},ttv1::Array{T,1},ttv2::Array{T,1},f1::Array{T,2},f2::Array{T,2},b::Array{T,2},alpha0::T,b0::Array{T,2})
+function compute_ttv!(jmax::Integer,p1::Planet_plane,p2::Planet_plane,time1::Vector,time2::Vector,ttv1::Vector,ttv2::Vector,f1::Array,f2::Array,b::Array,alpha0::Number,b0::Array)
 
 # Computes transit-timing variations to linear order in
 # eccentricity for non-resonant, plane-parallel planets.

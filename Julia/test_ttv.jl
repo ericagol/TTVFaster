@@ -12,16 +12,22 @@ function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Vector; WriteOutpu
 @assert(length(data)==10)
 # Performs a test of the transit_times.jl routine
 # Set up planets planar-planet types for the inner and outer planets:
-p1=Planet_plane(data[1],data[2],data[3],sqrt(data[4]^2+data[ 5]^2),atan2(data[ 5],data[4]))
-p2=Planet_plane(data[6],data[7],data[8],sqrt(data[9]^2+data[10]^2),atan2(data[10],data[9]))
+# WARNING HACK THAT BREAKS THINGS FOR TESTING ONLY
+p1=Planet_plane(data[1],data[2],data[3],sqrt(data[4]^2+data[ 5]^2),atan(data[ 5]/data[4]))
+p2=Planet_plane(data[6],data[7],data[8],sqrt(data[9]^2+data[10]^2),atan(data[10]/data[9]))
+# p1=Planet_plane(data[1],data[2],data[3],sqrt(data[4]^2+data[ 5]^2),atan2(data[ 5],data[4]))
+# p2=Planet_plane(data[6],data[7],data[8],sqrt(data[9]^2+data[10]^2),atan2(data[10],data[9]))
 time1 = collect(p1.trans0 + linspace(0,n1-1,n1) * p1.period)
 time2 = collect(p2.trans0 + linspace(0,n2-1,n2) * p2.period)
 alpha0=(p1.period/p2.period)^(2//3)
 # Initialize the computation of the Laplace coefficients:
 b0=laplace_coefficients_initialize(jmax+1,alpha0)
 # Define arrays to hold the TTVs:
-ttv1=Array(Float64,n1)
-ttv2=Array(Float64,n2)
+#ttv1=Array(Float64,n1)
+#ttv2=Array(Float64,n2)
+# Should be smarter, but for now just get it to work...
+ttv1=Array(Number,n1)
+ttv2=Array(Number,n2)
 # Define arrays to hold the TTV coefficients and Laplace coefficients:
 f1=Array(Float64,jmax+2,5)
 f2=Array(Float64,jmax+2,5)
