@@ -42,12 +42,12 @@ for j=0:jmax
     f1[j+1,5]=alpha*u(beta+alpha*sqrtalpha,jd*(-jd*A_j00-0.5*A_j01),-jd*A_j10-0.5*A_j11)
   else
     if j==0
-      f1[j+1,4]=alpha*u(beta-alpha*sqrt(alpha),jd*( jd*A_j00-0.5*A_j01-2.0*alpha*dj1), jd*A_j10-0.5*A_j11-2.0*alpha*dj1)
+      f1[j+1,4]=alpha*u(beta-alpha*sqrtalpha,jd*( jd*A_j00-0.5*A_j01-2.0*alpha*dj1), jd*A_j10-0.5*A_j11-2.0*alpha*dj1)
     else
       f1[j+1,1]=alpha*u(beta          ,jd*(    A_j00-alpha*dj1),A_j10-alpha*dj1)
       f1[j+1,2]=alpha*u(beta-1.0      ,jd*(-jd*A_j00-0.5*A_j10+1.5*alpha*dj1),-jd*A_j10-0.5*A_j20+alpha*dj1)
       f1[j+1,3]=alpha*u(beta+1.0      ,jd*( jd*A_j00-0.5*A_j10-0.5*alpha*dj1), jd*A_j10-0.5*A_j20-alpha*dj1)
-      f1[j+1,4]=alpha*u(beta-alpha*sqrt(alpha),jd*( jd*A_j00-0.5*A_j01-2.0*alpha*dj1), jd*A_j10-0.5*A_j11-2.0*alpha*dj1)
+      f1[j+1,4]=alpha*u(beta-alpha*sqrtalpha,jd*( jd*A_j00-0.5*A_j01-2.0*alpha*dj1), jd*A_j10-0.5*A_j11-2.0*alpha*dj1)
     end
   end
   # Add in the k=\pm 1 coefficients (note that d1 & d2 are the same as c1 & c2 for k=0):

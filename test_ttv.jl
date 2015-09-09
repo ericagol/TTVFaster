@@ -14,7 +14,7 @@ immutable Planet_plane
   omega    :: Float64
 end
 
-u(gamma::Float64,c1::Float64,c2::Float64)= ((3+gamma^2)*c1+2*gamma*c2)/(gamma*gamma*(1-gamma*gamma))
+u(gamma::Float64,c1::Float64,c2::Float64)= ((3+gamma*gamma)*c1+2*gamma*c2)/(gamma*gamma*(1-gamma*gamma))
 # m=+/-1
 v(z::Float64,d1::Float64,d2::Float64,m::Int64)= ((m*(1-z*z)+6*z)*d1+(2+z*z)*d2)/(z*(1-z*z)*(z+m)*(z+2*m))
 
