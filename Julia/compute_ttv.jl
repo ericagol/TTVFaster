@@ -5,6 +5,18 @@
 #include("ttv_coeff.jl")
 include("ttv_succinct.jl")
 
+immutable Planet_plane
+# Parameters of a planet in a plane-parallel system
+# Mass ratio of the planet to the star:
+  mass_ratio :: Float64
+# Initial time of transit:
+  period   :: Float64
+  trans0   :: Float64
+  eccen    :: Float64
+# longitude of periastron measured from line of sight, in radians:
+  omega    :: Float64
+end
+
 function compute_ttv!(jmax::Int64,p1::Planet_plane,p2::Planet_plane,time1::Array{Float64,1},time2::Array{Float64,1},ttv1::Array{Float64,1},ttv2::Array{Float64,1},f1::Array{Float64,2},f2::Array{Float64,2},b::Array{Float64,2},alpha0::Float64,b0::Array{Float64,2})
 
 # Computes transit-timing variations to linear order in
@@ -43,7 +55,7 @@ n2=2pi/p2.period
 # Compute initial longitudes:
 lam10=-n1*p1.trans0 + 2*p1.eccen*sin1om
 lam20=-n2*p2.trans0 + 2*p2.eccen*sin2om
-for i=1:ntime1
+@inbounds for i=1:ntime1
 # Compute the longitudes of the planets at times of transit of planet 1 (equation 49):
   lam11 = n1*time1[i]+lam10
   lam21 = n2*time1[i]+lam20
@@ -73,7 +85,7 @@ for i=1:ntime1
   ttv1[i] = ttv1[i]*p1.period*p2.mass_ratio/(2pi)
 end
 # Compute TTVs for outer planet (equation 33):
-for i=1:ntime2
+@inbounds for i=1:ntime2
 # Compute the longitudes of the planets at times of transit of planet 2:
   lam12 = n1*time2[i]+lam10
   lam22 = n2*time2[i]+lam20
@@ -105,3 +117,4 @@ end
 # Finished!
 return
 end
+
