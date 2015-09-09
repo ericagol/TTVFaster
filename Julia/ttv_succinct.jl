@@ -17,7 +17,7 @@ end
 sqrtalpha = sqrt(alpha)
 
 # Loop over j:
-for j=0:jmax
+@inbounds for j=0:jmax
   # \delta_{j1} (this is indirect coefficient which is only needed for j=1)
   dj1 = j==1 ? 1.0 : 0.0
 

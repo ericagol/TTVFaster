@@ -2,22 +2,6 @@
 # compute_ttv.jl.  Please cite Agol & Deck (2015) if
 # you make use of this in your research.
 
-immutable Planet_plane
-# Parameters of a planet in a plane-parallel system
-# Mass ratio of the planet to the star:
-  mass_ratio :: Float64
-# Initial time of transit:
-  period   :: Float64
-  trans0   :: Float64
-  eccen    :: Float64
-# longitude of periastron measured from line of sight, in radians:
-  omega    :: Float64
-end
-
-u(gamma::Float64,c1::Float64,c2::Float64)= ((3+gamma*gamma)*c1+2*gamma*c2)/(gamma*gamma*(1-gamma*gamma))
-# m=+/-1
-v(z::Float64,d1::Float64,d2::Float64,m::Int64)= ((m*(1-z*z)+6*z)*d1+(2+z*z)*d2)/(z*(1-z*z)*(z+m)*(z+2*m))
-
 include("compute_ttv.jl")
 include("laplace_coefficients_initialize.jl")
 
@@ -50,8 +34,6 @@ if WriteOutput
    # Write the mean ephemeris and TTV results to two files:
    writedlm("inner_ttv.txt",[time1 ttv1])
    writedlm("outer_ttv.txt",[time2 ttv2])
-   return ttv1,ttv2
-else
-   return nothing
 end
+   return ttv1,ttv2
 end
