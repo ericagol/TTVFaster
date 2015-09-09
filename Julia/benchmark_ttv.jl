@@ -2,7 +2,8 @@ data=readdlm("kepler62ef_planets.txt",',',Float64)
 include("test_ttv.jl")  
 @time ttv1,ttv2=test_ttv(5,40,20,data); # This call includes time to compile
 
-@time ttv1,ttv2=test_ttv(5,40,20,data,WriteOutput=false,num_evals=10000);
+#@time ttv1,ttv2=test_ttv(5,40,20,data,WriteOutput=false,num_evals=10000);
+@time test_ttv(5,40,20,data,WriteOutput=false,num_evals=1000000);
 
 println("# Ignore this: ",hash(ttv1)+hash(ttv2)) # This just makes sure optimizer doesn't optimize away important calculations.
 

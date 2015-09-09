@@ -26,10 +26,14 @@ ttv2=Array(Float64,n2)
 f1=Array(Float64,jmax+2,5)
 f2=Array(Float64,jmax+2,5)
 b=Array(Float64,jmax+2,3)
+hashsum = 0
 for i in 1:num_evals
    # Call the compute_ttv code which implements equation (33)
    compute_ttv!(jmax,p1,p2,time1,time2,ttv1,ttv2,f1,f2,b,alpha0,b0)
+   hashsum += hash(ttv1)+hash(ttv2)
 end
+println("# Ignore this: ",hashsum) # This just makes sure optimizer doesn't optimize away important calculations.
+
 if WriteOutput
    # Write the mean ephemeris and TTV results to two files:
    writedlm("inner_ttv.txt",[time1 ttv1])
