@@ -1,4 +1,4 @@
-function laplace_wisdom(s::Float64,i::Int64,j::Int64,a::Float64)
+function laplace_wisdom(s::Real,i::Integer,j::Integer,a::Real)
 # function laplace_wisdom,s,i,j,a  IDL
 # double laplace(double s, int i, int j, double a);  c
 
@@ -14,7 +14,7 @@ function laplace_wisdom(s::Float64,i::Int64,j::Int64,a::Float64)
 #   by series summation */
 
 ##define LAPLACE_EPS 1.0e-12
-const LAPLACE_EPS=1.0e-12
+const LAPLACE_EPS = convert(eltype(a),1.0e-12)
 
 as = a*a
 

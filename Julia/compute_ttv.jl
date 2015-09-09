@@ -17,7 +17,7 @@ immutable Planet_plane
   omega    :: Float64
 end
 
-function compute_ttv!(jmax::Int64,p1::Planet_plane,p2::Planet_plane,time1::Array{Float64,1},time2::Array{Float64,1},ttv1::Array{Float64,1},ttv2::Array{Float64,1},f1::Array{Float64,2},f2::Array{Float64,2},b::Array{Float64,2},alpha0::Float64,b0::Array{Float64,2})
+function compute_ttv!{T<:Real}(jmax::Integer,p1::Planet_plane,p2::Planet_plane,time1::Array{T,1},time2::Array{T,1},ttv1::Array{T,1},ttv2::Array{T,1},f1::Array{T,2},f2::Array{T,2},b::Array{T,2},alpha0::T,b0::Array{T,2})
 
 # Computes transit-timing variations to linear order in
 # eccentricity for non-resonant, plane-parallel planets.

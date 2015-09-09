@@ -5,7 +5,7 @@
 include("compute_ttv.jl")
 include("laplace_coefficients_initialize.jl")
 
-function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Array{Float64,2}; WriteOutput::Bool = true, num_evals::Integer = 1)
+function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Vector; WriteOutput::Bool = true, num_evals::Integer = 1)
 @assert(jmax>=1)  # Should there be a larger minimum?
 @assert(n1>2)
 @assert(n2>2)
@@ -41,3 +41,4 @@ if WriteOutput
 end
    return ttv1,ttv2
 end
+

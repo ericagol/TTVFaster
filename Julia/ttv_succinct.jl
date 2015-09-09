@@ -2,11 +2,11 @@
 # solution from Agol & Deck (2015).  Please cite this paper
 # if you make use of this in your research.
 
-u(gamma::Real,c1::Real,c2::Real)= ((3+gamma*gamma)*c1+2*gamma*c2)/(gamma*gamma*(1-gamma*gamma))
+u{T<:Real}(gamma::T,c1::T,c2::T)= ((3+gamma*gamma)*c1+2*gamma*c2)/(gamma*gamma*(1-gamma*gamma))
 # m=+/-1
-v(z::Real,d1::Float64,d2::Real,m::Real)= ((m*(1-z*z)+6*z)*d1+(2+z*z)*d2)/(z*(1-z*z)*(z+m)*(z+2*m))
+v{T<:Real}(z::T,d1::T,d2::T,m::Integer)= ((m*(1-z*z)+6*z)*d1+(2+z*z)*d2)/(z*(1-z*z)*(z+m)*(z+2*m))
 
-function ttv_succinct!(jmax::Int64,alpha::Float64,f1::Array{Float64,2},f2::Array{Float64,2},b::Array{Float64,2},alpha0::Float64,b0::Array{Float64,2})
+function ttv_succinct!{T<:Real}(jmax::Integer,alpha::T,f1::Array{T,2},f2::Array{T,2},b::Array{T,2},alpha0::T,b0::Array{T,2})
 
 # See simple_solution.pdf 7/16/2015
 
@@ -36,7 +36,7 @@ sqrtalpha = sqrt(alpha)
   A_j20 =  alpha*alpha * b[j+1,3]
   A_j11 = -(2*A_j10 + A_j20)
   A_j02 = 2*A_j00 + 4*A_j10 + A_j20
-  jd=convert(Float64,j)
+  jd=convert(eltype(alpha),j)
   # Inner planet coefficients, in order k=0,-1,1,-2,2 (see Table 1):
   if j >=2
     f1[j+1,1]=alpha*u(beta          ,jd*(    A_j00-alpha*dj1),A_j10-alpha*dj1)
