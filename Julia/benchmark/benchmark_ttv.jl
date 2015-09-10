@@ -1,4 +1,4 @@
-data=readdlm("../kepler62ef_planets.txt",',',Float64)  
+data=vec(readdlm("../kepler62ef_planets.txt",',',Float64) ) 
 include("../test_ttv.jl")  
 @time ttv1,ttv2=test_ttv(5,40,20,data); # This call includes time to compile
 @time ttv1,ttv2=test_ttv(5,40,20,data,WriteOutput=false,num_evals=100000);
