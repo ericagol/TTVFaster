@@ -7,7 +7,7 @@ b0=Array(eltype(alpha),nmax,jmax+1) # Array to hold the coefficients
 # Compute the highest two Laplace coefficients using Wisdom's series approach:
 for j=0:jmax
   for i=0:nmax-1
-    b0[i+1,j+1]=laplace_wisdom(0.5,j,i,alpha)/alpha^i
+    b0[i+1,j+1]=laplace_wisdom(1//2,j,i,alpha)/alpha^i
   end
 end
 return b0

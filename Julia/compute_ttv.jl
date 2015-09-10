@@ -22,19 +22,22 @@ immutable Planet_plane{T<:Number}
   omega    :: T
 end
 
-immutable Planet_plane_hk{T<:Number}
-# Parameters of a planet in a plane-parallel system
-# Mass ratio of the planet to the star:
+immutable Planet_plane_hk{T<:Number} # Parameters of a planet in a plane-parallel system
+  # Mass ratio of the planet to the star:
   mass_ratio :: T
-# Initial time of transit:
+  # Initial time of transit:
   period   :: T
   trans0   :: T
-#  eccen    :: T
-# longitude of periastron measured from line of sight, in radians:
-#  omega    :: T
+  # e times cos or sin of longitude of periastron measured from line of sight, in radians:
   ecosw    :: T
   esinw    :: T
 end
+
+# Error message to explain to anyone who tries to use the old version
+function compute_ttv!(jmax::Integer,p1::Planet_plane,p2::Planet_plane,time1::Vector,time2::Vector,ttv1::Vector,ttv2::Vector,f1::Array,f2::Array,b::Array,alpha0::Number,b0::Array) 
+  error("The Planet_plane data structure has been deprecated in favor of Planet_plane_hk")
+end
+
 
 function compute_ttv!(jmax::Integer,p1::Planet_plane_hk,p2::Planet_plane_hk,time1::Vector,time2::Vector,ttv1::Vector,ttv2::Vector,f1::Array,f2::Array,b::Array,alpha0::Number,b0::Array)
 
@@ -66,10 +69,10 @@ ttv_succinct!(jmax+1,alpha,f1,f2,b,alpha0,b0)  # I need to compute coefficients 
 # Compute since of \pomegas:
 e1 = sqrt(p1.esinw*p1.esinw+p1.ecosw*p1.ecosw)
 e2 = sqrt(p2.esinw*p2.esinw+p2.ecosw*p2.ecosw)
-sin1om=p1.esinw/e1 # sin(p1.omega)
-sin2om=p2.esinw/e2 # sin(p2.omega)
-cos1om=p1.ecosw/e1 # cos(p1.omega)
-cos2om=p2.ecosw/e2 # cos(p2.omega)
+sin1om=p1.esinw/e1 
+sin2om=p2.esinw/e2
+cos1om=p1.ecosw/e1 
+cos2om=p2.ecosw/e2
 # Compute mean motions:
 n1=2pi/p1.period
 n2=2pi/p2.period
@@ -83,10 +86,6 @@ lam20=-n2*p2.trans0 + 2*p2.esinw # 2*p2.eccen*sin2om
   psi1  = lam11-lam21 # Compute difference in longitudes at times of transit of planet 1
   sinpsi1=sin(psi1)
   cospsi1=cos(psi1)
-  #sinlam1om1=sin(lam11-p1.omega)
-  #coslam1om1=cos(lam11-p1.omega)
-  #sinlam1om2=sin(lam11-p2.omega)
-  #coslam1om2=cos(lam11-p2.omega)
   sinlam11 = sin(lam11)
   coslam11 = cos(lam11) 
   sinlam1om1=sinlam11*cos1om-coslam11*sin1om
@@ -121,10 +120,6 @@ end
   psi2  = lam12-lam22 # Compute difference in longitudes at times of transit of planet 2
   sinpsi2=sin(psi2)
   cospsi2=cos(psi2)
-  #sinlam2om1=sin(lam22-p1.omega)
-  #coslam2om1=cos(lam22-p1.omega)
-  #sinlam2om2=sin(lam22-p2.omega)
-  #coslam2om2=cos(lam22-p2.omega)
   sinlam2om1=sinlam22*cos1om-coslam22*sin1om
   coslam2om1=coslam22*cos1om+sinlam22*sin1om
   sinlam2om2=sinlam22*cos2om-coslam22*sin2om

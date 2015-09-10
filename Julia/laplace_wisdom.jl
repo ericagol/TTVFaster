@@ -1,10 +1,11 @@
-function laplace_wisdom(s::Real,i::Integer,j::Integer,a::Number)
+function laplace_wisdom(s::Rational,i::Integer,j::Integer,a::Number)
 # function laplace_wisdom,s,i,j,a  IDL
 # double laplace(double s, int i, int j, double a);  c
 
 
 #/* Code due to Jack Wisdom */
-#/* compute Laplace coefficients and Leverrier derivatives
+#/* compute Laplace coefficients and Leverrier derivative/
+
 #          j
 #     j   d     i
 #    a   ---   b (a)
@@ -16,13 +17,11 @@ function laplace_wisdom(s::Real,i::Integer,j::Integer,a::Number)
 ##define LAPLACE_EPS 1.0e-12
 const LAPLACE_EPS = convert(eltype(a),1.0e-12)
 
-as = a*a
-
 #if (i lt 0) then i = -i
 i=abs(i)
 
 if j <= i     #/* compute first term in sum */
-  factor4 = 1.0
+  factor4 = one(a)
   for k=0:j-1
     factor4 *= i - k
   end
@@ -30,8 +29,8 @@ if j <= i     #/* compute first term in sum */
   q0 = 0
 else
   q0 = fld(j + 1 - i,2)
-  lap_coef_sum = 0.0
-  factor4 = 1.0
+  lap_coef_sum = zero(a)
+  factor4 = one(a)
 end
 
 #  /* compute factors for terms in lap_coef_sum */
@@ -50,12 +49,12 @@ else
   q=1
 end
 #println(j+1-i,q0)
-term = as * factor1 * factor2 / (factor3 * q)
+term = a*a * factor1 * factor2 / (factor3 * q)
 
 #  /* sum series */
 
 while  (term*factor4) > LAPLACE_EPS
-  factor4 = 1.0
+  factor4 = one(a)
   for k=0:j-1
     factor4 *= (2*q + i - k)
   end
@@ -64,13 +63,13 @@ while  (term*factor4) > LAPLACE_EPS
   factor2 += 1
   factor3 += 1
   q = q+1
-  term *= as * factor1 * factor2 / (factor3 * q)
+  term *= a*a * factor1 * factor2 / (factor3 * q)
 end
 
 #  /* fix coefficient */
 
 for k=0:i-1
-  lap_coef_sum *= (s + k)/(k+1)
+  lap_coef_sum *= (s+k)/(k+1)
 end
 
 apower = (q0 <= 0) ?  i : 2*q0 + i - 2
