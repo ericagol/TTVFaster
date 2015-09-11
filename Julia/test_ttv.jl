@@ -30,6 +30,7 @@ f1=Array(Float64,jmax+2,5)
 f2=Array(Float64,jmax+2,5)
 b=Array(Float64,jmax+2,3)
 hashsum = 0
+Profile.clear_malloc_data()
 for i in 1:num_evals
    # Call the compute_ttv code which implements equation (33)
    TTVFaster.compute_ttv!(jmax,p1,p2,time1,time2,ttv1,ttv2,f1,f2,b,alpha0,b0)

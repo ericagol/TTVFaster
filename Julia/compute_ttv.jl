@@ -92,9 +92,9 @@ lam20=-n2*p2.trans0 + 2*p2.esinw # 2*p2.eccen*sin2om
   coslam1om1=coslam11*cos1om+sinlam11*sin1om
   sinlam1om2=sinlam11*cos2om-coslam11*sin2om
   coslam1om2=coslam11*cos2om+sinlam11*sin2om
-  ttv1[i]=0.0
-  sinjm1psi1=0.0
-  cosjm1psi1=1.0
+  ttv1[i]=zero(p1.period) #0.0
+  sinjm1psi1=zero(p1.period) #0.0
+  cosjm1psi1=one(p1.period) #1.0
 # Sum over j:
   for j=1:jmax
     sinjpsi1=sinjm1psi1*cospsi1+cosjm1psi1*sinpsi1
@@ -124,9 +124,9 @@ end
   coslam2om1=coslam22*cos1om+sinlam22*sin1om
   sinlam2om2=sinlam22*cos2om-coslam22*sin2om
   coslam2om2=coslam22*cos2om+sinlam22*sin2om
-  ttv2[i]=0.0
-  sinjm1psi2=0.0
-  cosjm1psi2=1.0
+  ttv2[i]=zero(p2.period) #0.0
+  sinjm1psi2=zero(p2.period) #0.0
+  cosjm1psi2=one(p2.period) #1.0
 # Sum over j:
   for j=1:jmax
     sinjpsi2=sinjm1psi2*cospsi2+cosjm1psi2*sinpsi2
