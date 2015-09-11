@@ -3,7 +3,6 @@ include("../test_ttv.jl")
 @time ttv1,ttv2=test_ttv(5,40,20,data); # This call includes time to compile
 Profile.clear_malloc_data()
 @time ttv1,ttv2=test_ttv(5,40,20,data,WriteOutput=false,num_evals=100000);
-quit()
 
 println("# Ignore this: ",hash(ttv1)+hash(ttv2)) # This just makes sure optimizer doesn't optimize away important calculations.
 

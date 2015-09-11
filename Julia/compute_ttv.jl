@@ -3,26 +3,32 @@
 # you make use of this in published research.
 
 module TTVFaster
+
+VERSION < v"0.4-dev" && using Docile
+
 export Planet_plane_hk, compute_ttv!
-export laplace_coefficients_initialize
+export Planet_plane                   # Deprecated, only exported to make the error message work
 
 #include("ttv_coeff.jl")    # TODO: Any reason not to delete this?
 include("ttv_succinct.jl")
-include("laplace_coefficients_initialize.jl")
 
-immutable Planet_plane{T<:Number}
+include("laplace_coefficients_initialize.jl")
+laplace_coefficients_initialize(jmax::Integer,alpha::Number) = LaplaceCoefficients.initialize(jmax,alpha)
+export laplace_coefficients_initialize
+
+immutable Planet_plane
 # Parameters of a planet in a plane-parallel system
-# Mass ratio of the planet to the star:
-  mass_ratio :: T
-# Initial time of transit:
-  period   :: T
-  trans0   :: T
-  eccen    :: T
+  # Mass ratio of the planet to the star:
+  mass_ratio :: Float64
+  # Initial time of transit:
+  period   :: Float64
+  trans0   :: Float64
+  eccen    :: Float64
 # longitude of periastron measured from line of sight, in radians:
-  omega    :: T
+  omega    :: Float64
 end
 
-immutable Planet_plane_hk{T<:Number} # Parameters of a planet in a plane-parallel system
+type Planet_plane_hk{T<:Number} # Parameters of a planet in a plane-parallel system
   # Mass ratio of the planet to the star:
   mass_ratio :: T
   # Initial time of transit:
@@ -33,14 +39,14 @@ immutable Planet_plane_hk{T<:Number} # Parameters of a planet in a plane-paralle
   esinw    :: T
 end
 
+"""
 # Error message to explain to anyone who tries to use the old version
+"""
 function compute_ttv!(jmax::Integer,p1::Planet_plane,p2::Planet_plane,time1::Vector,time2::Vector,ttv1::Vector,ttv2::Vector,f1::Array,f2::Array,b::Array,alpha0::Number,b0::Array) 
   error("The Planet_plane data structure has been deprecated in favor of Planet_plane_hk")
 end
 
-
-function compute_ttv!(jmax::Integer,p1::Planet_plane_hk,p2::Planet_plane_hk,time1::Vector,time2::Vector,ttv1::Vector,ttv2::Vector,f1::Array,f2::Array,b::Array,alpha0::Number,b0::Array)
-
+"""
 # Computes transit-timing variations to linear order in
 # eccentricity for non-resonant, plane-parallel planets.
 # Input:
@@ -57,6 +63,9 @@ function compute_ttv!(jmax::Integer,p1::Planet_plane_hk,p2::Planet_plane_hk,time
 #     f1: TTV coefficients for inner planet
 #     f2: TTV coefficients for outer planet
 #      b: Laplace coefficients (& derivatives) for outer planet
+"""
+function compute_ttv!(jmax::Integer,p1::Planet_plane_hk,p2::Planet_plane_hk,time1::Vector,time2::Vector,ttv1::Vector,ttv2::Vector,f1::Array,f2::Array,b::Array,alpha0::Number,b0::Array)
+
 # Compute the semi-major axis ratio of the planets:
 # println(p1.period,p2.period)
 const alpha = (p1.period/p2.period)^(2//3)  # Julia supports rational numbers!

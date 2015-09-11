@@ -18,7 +18,7 @@ time1 = collect(p1.trans0 + linspace(0,n1-1,n1) * p1.period)
 time2 = collect(p2.trans0 + linspace(0,n2-1,n2) * p2.period)
 alpha0=(p1.period/p2.period)^(2//3)
 # Initialize the computation of the Laplace coefficients:
-b0=TTVFaster.laplace_coefficients_initialize(jmax+1,alpha0)
+b0=TTVFaster.LaplaceCoefficients.initialize(jmax+1,alpha0)
 # Define arrays to hold the TTVs:
 #ttv1=Array(Float64,n1)
 #ttv2=Array(Float64,n2)
@@ -30,7 +30,6 @@ f1=Array(Float64,jmax+2,5)
 f2=Array(Float64,jmax+2,5)
 b=Array(Float64,jmax+2,3)
 hashsum = 0
-Profile.clear_malloc_data()
 for i in 1:num_evals
    # Call the compute_ttv code which implements equation (33)
    TTVFaster.compute_ttv!(jmax,p1,p2,time1,time2,ttv1,ttv2,f1,f2,b,alpha0,b0)

@@ -1,11 +1,5 @@
-function laplace_wisdom(s::Rational,i::Integer,j::Integer,a::Number)
-# function laplace_wisdom,s,i,j,a  IDL
-# double laplace(double s, int i, int j, double a);  c
-
-
-#/* Code due to Jack Wisdom */
+"""
 #/* compute Laplace coefficients and Leverrier derivative/
-
 #          j
 #     j   d     i
 #    a   ---   b (a)
@@ -13,6 +7,11 @@ function laplace_wisdom(s::Rational,i::Integer,j::Integer,a::Number)
 #        da
 #
 #   by series summation */
+#/* Code due to Jack Wisdom */
+"""
+function laplace_wisdom(s::Rational,i::Integer,j::Integer,a::Number)
+# function laplace_wisdom,s,i,j,a  IDL
+# double laplace(double s, int i, int j, double a);  c
 
 ##define LAPLACE_EPS 1.0e-12
 const LAPLACE_EPS = convert(eltype(a),1.0e-12)

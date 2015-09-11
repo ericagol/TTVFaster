@@ -1,7 +1,15 @@
+module LaplaceCoefficients
+
+VERSION < v"0.4-dev" && using Docile
+
+export laplace_coefficients_initialize
+export laplace_wisdom
 include("laplace_wisdom.jl")
 
-function laplace_coefficients_initialize(jmax::Integer,alpha::Number)
+"""
 # This computes the Laplace coefficients via recursion.
+"""
+function initialize(jmax::Integer,alpha::Number)
 const nmax=7
 b0=Array(eltype(alpha),nmax,jmax+1) # Array to hold the coefficients
 # Compute the highest two Laplace coefficients using Wisdom's series approach:
@@ -12,3 +20,5 @@ for j=0:jmax
 end
 return b0
 end
+
+end # module
