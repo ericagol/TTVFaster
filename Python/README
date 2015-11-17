@@ -4,7 +4,6 @@ This is an initial Python version of TTVFaster
 To run this routine, try this:
 
 ```
-
 Python$ ipython
 Python 2.7.8 |Anaconda 2.1.0 (x86_64)| (default, Aug 21 2014, 15:21:46) 
 Type "copyright", "credits" or "license" for more information.
@@ -20,7 +19,6 @@ object?   -> Details about 'object', use 'object??' for extra details.
 In [1]: from ttvfaster import call_ttv
 
 In [2]: call_ttv(5)
-
 ```
 
 The plot should match the figure_1.png in this directory.
