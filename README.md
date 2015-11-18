@@ -1,5 +1,5 @@
 # TTVFaster
-First order eccentricity transit timing variations (TTVs) computed in Agol &amp; Deck (2015)
+First order eccentricity transit timing variations (TTVs) computed in [Agol &amp; Deck (2015)](http://arxiv.org/abs/1509.01623)
 
 This implements equation (33) from that paper by computing the Laplace
 coefficients using a series solution due to Jack Wisdom, computing
