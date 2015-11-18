@@ -21,8 +21,8 @@ In [1]: from ttvfaster import call_ttv
 In [2]: call_ttv(5)
 ```
 
-The plot should match the figure_1.png here:
-https://cloud.githubusercontent.com/assets/243664/11231581/f2bd7c28-8d5e-11e5-8115-c579c4ba5033.png
+The plot should match the [figure_1.png here.]
+(https://cloud.githubusercontent.com/assets/243664/11231581/f2bd7c28-8d5e-11e5-8115-c579c4ba5033.png)
 
 Two files are created, inner_ttv.txt and outer_ttv.txt
 which are also in this directory.
