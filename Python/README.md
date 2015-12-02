@@ -1,28 +1,61 @@
 This is an initial Python version of TTVFaster
 (Agol & Deck 2015, http://arxiv.org/abs/1509.01623)
 
-Here is an example of running this routine:
+This calls the C implementation of the code using Cython.
+
+Building
+--------
+
+To build this code, run:
 
 ```
-Python$ ipython
-Python 2.7.8 |Anaconda 2.1.0 (x86_64)| (default, Aug 21 2014, 15:21:46) 
-Type "copyright", "credits" or "license" for more information.
-
-IPython 2.2.0 -- An enhanced Interactive Python.
-Anaconda is brought to you by Continuum Analytics.
-Please check out: http://continuum.io/thanks and https://binstar.org
-?         -> Introduction and overview of IPython's features.
-%quickref -> Quick reference.
-help      -> Python's own help system.
-object?   -> Details about 'object', use 'object??' for extra details.
-
-In [1]: from ttvfaster import call_ttv
-
-In [2]: call_ttv(5)
+python setup.py install
 ```
 
-The plot should match the [figure_1.png here.]
-(https://cloud.githubusercontent.com/assets/243664/11231581/f2bd7c28-8d5e-11e5-8115-c579c4ba5033.png)
+and then navigate to a different directory before you try to use it. If you
+want to run code from within this same directory, you should instead run
 
-Two files are created, inner_ttv.txt and outer_ttv.txt
-which are also in this directory.
+```
+python setup.py build_ext --inplace
+```
+
+Usage
+-----
+
+There's only one function ``run_ttvfaster``. To look at the docs, run:
+
+```
+from ttvfaster import run_ttvfaster
+print(run_ttvfaster.__doc__)
+```
+
+to see something that looks like:
+
+```
+Run TTVFaster by calling the C implementation via Cython.
+
+:param n_planets:
+    The number of planets.
+
+:param param_vec:
+    The parameter vector in the same format as used by the C
+    implementation::
+
+        mstar m1 p1 e1*cos(arg peri1) i1 Omega1 e1*sin(arg peri1) TT1
+        + repeat for remaining planets
+
+:param tmin:
+    The initial time.
+
+:param tmax:
+    The final time.
+
+:param j_max:
+    The maximum j to evaluate.
+
+:returns:
+    A list of numpy arrays (one for each planet) giving the list of
+    transit times for each planet.
+```
+
+``demo.py`` gives an example for how you might want to run this.
