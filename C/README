@@ -4,7 +4,7 @@ kdeck@caltech.edu
 Please cite Agol & Deck (2015) if you make use of this in your research.
 
 To compile:
-gcc -o predict_formula predict_formula.c -lm -O3 -Wall
+gcc -o predict_formula predict_formula.c ttvfaster.c -lm -O3 -Wall
 to run:
 ./predict_formula 2 test_ic2 0 1600 6 output_test_ic2
 ./executable    n_planets   param_file t0 tfinal jmax output_file
