@@ -4,6 +4,7 @@ and edited/optimized by Eric Ford.
 
 Here is an example of using the code in Julia:
 
+'''
 Julia$ julia
 _ _ _ ()_ | A fresh approach to technical computing
 () | () () | Documentation: http://docs.julialang.org
@@ -22,6 +23,7 @@ julia> @time ttv1,ttv2=test_ttv(5,40,20,data);
 elapsed time: 0.345652398 seconds (13941760 bytes allocated)
 julia> @time ttv1,ttv2=test_ttv(5,40,20,data);
 elapsed time: 0.000526126 seconds (20404 bytes allocated)
+'''
 
 This computes the TTVs for a system similar to Kepler-62e/f stored in the file kepler62ef_planet.txt. The TTVs will be written to the files inner_ttv.txt and outer_ttv.txt, as well as stored in the variables ttv1 and ttv2. The test_ttv.jl routine accepts jmax (the maximum j to sum to, in this example 5), ntime1 (number of transits of the inner planet), ntime2 (the number of transits of the outer planet), and data which contains the parameters of the planet.
 
