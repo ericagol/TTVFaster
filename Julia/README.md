@@ -5,13 +5,15 @@ and edited/optimized by Eric Ford.
 Here is an example of using the code in Julia:
 
 ```
-Julia$ julia
-_ _ _ ()_ | A fresh approach to technical computing
-() | () () | Documentation: http://docs.julialang.org
-_ _ _| | __ _ | Type "help()" for help.
-| | | | | | |/ ` | | | | || | | | (| | | Version 0.3.0 (2014-08-20 20:43 UTC)
-/ |\'|||_'| | Official http://julialang.org/ release
-|_/ | x86_64-apple-darwin13.3.0
+ulia$ julia  
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing  
+  (_)     | (_) (_)    |  Documentation: http://docs.julialang.org  
+   _ _   _| |_  __ _   |  Type "help()" for help.  
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.3.0 (2014-08-20 20:43 UTC)  
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release  
+|__/                   |  x86_64-apple-darwin13.3.0  
 
 julia> data=readdlm("kepler62ef_planets.txt",',',Float64)
 1x10 Array{Float64,2}: 3.02306e-5 122.386 -16.5926 -0.00127324 0.0026446 1.67874e-5 267.307 155.466 -0.0025544 0.00117917
