@@ -3,8 +3,7 @@ This is an initial Python version of TTVFaster
 
 This calls the C implementation of the code using Cython.
 
-Building
---------
+## Building
 
 To build this code, run:
 
@@ -19,10 +18,9 @@ want to run code from within this same directory, you should instead run
 python setup.py build_ext --inplace
 ```
 
-Usage
------
+## Usage
 
-There's only one function ``run_ttvfaster``. To look at the docs, run:
+There's only one function `run_ttvfaster`. To look at the docs, run:
 
 ```
 from ttvfaster import run_ttvfaster
@@ -58,4 +56,14 @@ Run TTVFaster by calling the C implementation via Cython.
     transit times for each planet.
 ```
 
-``demo.py`` gives an example for how you might want to run this.
+`demo.py` gives an example for how you might want to run this.
+
+## Releases
+
+To build a release, run:
+
+```
+python -m pip install -U pip pep517 twine
+rm -rf build dist
+python -m pep517.build .
+```
