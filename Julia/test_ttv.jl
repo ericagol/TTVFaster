@@ -5,7 +5,7 @@
 include("compute_ttv.jl")
 #include("laplace_coefficients_initialize.jl")
 
-function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Vector; WriteOutput::Bool = true, num_evals::Integer = 1, profile::Bool = false)
+function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Vector{Float64}, WriteOutput::Bool = true, num_evals::Integer = 1, profile::Bool = false) 
   @assert(jmax>=1)  # Should there be a larger minimum?
   @assert(n1>2)
   @assert(n2>2)
@@ -18,7 +18,7 @@ function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Vector; WriteOutpu
   time2 = collect(p2.trans0 .+ range(0,stop=n2-1,length=n2) .* p2.period)
   alpha0=(p1.period/p2.period)^(2//3)
   # Initialize the computation of the Laplace coefficients:
-  b0=TTVFaster.LaplaceCoefficients.initialize(jmax+1,alpha0)
+  # b0=TTVFaster.LaplaceCoefficients.initialize(jmax+1,alpha0)
   # Define arrays to hold the TTVs:
   #ttv1=Array(Float64,n1)
   #ttv2=Array(Float64,n2)
@@ -32,7 +32,7 @@ function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Vector; WriteOutpu
   hashsum = 0
   for i in 1:num_evals
    # Call the compute_ttv code which implements equation (33)
-   TTVFaster.compute_ttv!(jmax,p1,p2,time1,time2,ttv1,ttv2,f1,f2,b,alpha0,b0)
+   TTVFaster.compute_ttv!(jmax,p1,p2,time1,time2,ttv1,ttv2)#,f1,f2,b,alpha0,b0)
     if profile
       hashsum += hash(ttv1)+hash(ttv2)
     end
