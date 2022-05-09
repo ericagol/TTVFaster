@@ -12,4 +12,4 @@ To run the example code, from the shell command prompt type:
 
 This reads the input parameters from kepler62ef_planets.txt, creates
 the transit times, and writes these to two files: inner_ttv.txt and
-outer_ttv.txt.  David has verified
+outer_ttv.txt.  David has verified that the Fortran results agree with the python results.
